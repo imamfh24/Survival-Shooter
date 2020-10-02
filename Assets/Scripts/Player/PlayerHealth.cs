@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     Animator anim;
     AudioSource playerAudio;
     PlayerMovement playerMovement;
-    //PlayerShooting playerShooting;
+    PlayerShooting playerShooting;
     bool isDead;                                                
     bool damaged;                                               
 
@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
-        //playerShooting = GetComponentInChildren<PlayerShooting>();
+        playerShooting = GetComponentInChildren<PlayerShooting>();
 
         currentHealth = startingHealth;
     }
@@ -89,7 +89,7 @@ public class PlayerHealth : MonoBehaviour
 
         //Mematikan script player movement
         playerMovement.enabled = false;
-        //playerShooting.enabled = false;
+        playerShooting.enabled = false;
     }
 
     public void RestartLevel()
