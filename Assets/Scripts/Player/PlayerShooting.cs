@@ -17,6 +17,7 @@ public class PlayerShooting : MonoBehaviour
     Light gunLight;
     float effectsDisplayTime = 0.2f;
 
+
     void Awake()
     {
         //GetMask
@@ -29,8 +30,10 @@ public class PlayerShooting : MonoBehaviour
         gunLight = GetComponent<Light>();
     }
 
+
     void Update()
     {
+
         timer += Time.deltaTime;
 
         if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
@@ -44,6 +47,7 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
+
     public void DisableEffects()
     {
         //disable line renderer
@@ -53,26 +57,34 @@ public class PlayerShooting : MonoBehaviour
         gunLight.enabled = false;
     }
 
+
     public void Shoot()
     {
         timer = 0f;
+
         //Play audio
         gunAudio.Play();
-        //Enable light
+
+        //enable Light
         gunLight.enabled = true;
+
         //Play gun particle
         gunParticles.Stop();
         gunParticles.Play();
-        //Enable Line Renderer dan set first position
+
+        //enable Line renderer dan set first position
         gunLine.enabled = true;
         gunLine.SetPosition(0, transform.position);
+
         //Set posisi ray shoot dan direction
         shootRay.origin = transform.position;
         shootRay.direction = transform.forward;
-        //Lakukan raycast jika mendeteksi di enemy hit apapun
+        
+        //Lakukan raycast jika mendeteksi id nemy hit apapun
         if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
         {
-            //Lakukan raycast hit get component enemyhealth
+            Debug.Log("Shoot");
+            //Lakukan raycast hit hace component Enemyhealth
             EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
 
             if (enemyHealth != null)
@@ -80,12 +92,13 @@ public class PlayerShooting : MonoBehaviour
                 //Lakukan Take Damage
                 enemyHealth.TakeDamage(damagePerShot, shootHit.point);
             }
+
             //Set line end position ke hit position
             gunLine.SetPosition(1, shootHit.point);
         }
         else
         {
-            //Set line end position ke range from barrel
+            //set line end position ke range freom barrel
             gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
         }
     }

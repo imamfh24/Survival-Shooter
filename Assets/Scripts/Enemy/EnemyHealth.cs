@@ -41,13 +41,13 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    public void TakeDamage (int amount, Vector3 hitPoint)
+    public void TakeDamage(int amount, Vector3 hitPoint)
     {
         //Check jika dead
         if (isDead) return;
 
-        //Play audio
-        enemyAudio.Play ();
+        //play audio
+        enemyAudio.Play();
 
         //kurangi health
         currentHealth -= amount;
