@@ -53,7 +53,7 @@ public class PlayerShooting : MonoBehaviour
         gunLight.enabled = false;
     }
 
-    void Shoot()
+    public void Shoot()
     {
         timer = 0f;
         //Play audio
