@@ -73,6 +73,14 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    //Fungsi untuk menambah darah
+    public void AddHealth(int health)
+    {
+        currentHealth = health;
+        //Merubah tampilan dari health slider
+        healthSlider.value = currentHealth;
+    }
+
 
     void Death()
     {

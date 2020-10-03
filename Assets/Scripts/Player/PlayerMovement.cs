@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     const string FLOOR = "Floor";
 
-    public float speed = 6f;
+    public float startingSpeed = 6f;
     Vector3 movement;
     Animator anim;
     Rigidbody playerRigidbody;
     int floorMask;
     float camRayLength = 100f;
+
+    private float currentSpeed;
 
     private void Awake()
     {
@@ -22,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
 
         // Mendaptkan komponen Rigidbody
         playerRigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        currentSpeed = startingSpeed;
     }
 
     private void FixedUpdate()
@@ -72,11 +80,18 @@ public class PlayerMovement : MonoBehaviour
         movement.Set(h, 0f, v);
 
         //Menormalisasi nilai vector agar total panjang dari vector adalah 1
-        movement = movement.normalized * speed * Time.deltaTime;
+        movement = movement.normalized * currentSpeed * Time.deltaTime;
 
         /*Debug.Log(movement);*/
 
         //Move to position
         playerRigidbody.MovePosition(transform.position + movement);
+    }
+
+    public IEnumerator AddMovementSpeed(float newSpeed, float waitTime)
+    {
+        currentSpeed += newSpeed;
+        yield return new WaitForSecondsRealtime(waitTime);
+        currentSpeed = startingSpeed;
     }
 }
