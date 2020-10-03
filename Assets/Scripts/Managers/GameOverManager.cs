@@ -10,8 +10,7 @@ public class GameOverManager : MonoBehaviour
 
 
     Animator anim;                          
-    float restartTimer;                    
-
+    float restartTimer;
 
     void Awake()
     {
@@ -19,6 +18,11 @@ public class GameOverManager : MonoBehaviour
     }
 
     void Update()
+    {
+        GameOver();
+    }
+
+    private void GameOver()
     {
         if (playerHealth.currentHealth <= 0)
         {
@@ -32,10 +36,10 @@ public class GameOverManager : MonoBehaviour
             }
         }
     }
-
+/*
     public void ShowWarning(float enemyDistance)
     {
         warningText.text = string.Format("! {0}m", Mathf.RoundToInt(enemyDistance));
         anim.SetTrigger("Warning");
-    }
+    }*/
 }

@@ -36,7 +36,7 @@ public class PlayerShooting : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets)
         {
             Shoot();
         }
@@ -79,13 +79,12 @@ public class PlayerShooting : MonoBehaviour
         //Set posisi ray shoot dan direction
         shootRay.origin = transform.position;
         shootRay.direction = transform.forward;
-        
+
         //Lakukan raycast jika mendeteksi id nemy hit apapun
-        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+        if (Physics.Raycast(shootRay.origin, shootRay.direction, out shootHit, range))
         {
-            Debug.Log("Shoot");
             //Lakukan raycast hit hace component Enemyhealth
-            EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+            EnemyHealth enemyHealth = shootHit.transform.GetComponent<EnemyHealth>();
 
             if (enemyHealth != null)
             {
