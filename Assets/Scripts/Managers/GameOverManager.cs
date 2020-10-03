@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameOverManager : MonoBehaviour
 {
+    public Text warningText;
     public PlayerHealth playerHealth;       
     public float restartDelay = 5f;            
 
@@ -15,7 +17,6 @@ public class GameOverManager : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
-
 
     void Update()
     {
@@ -30,5 +31,11 @@ public class GameOverManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
+    }
+
+    public void ShowWarning(float enemyDistance)
+    {
+        warningText.text = string.Format("! {0}m", Mathf.RoundToInt(enemyDistance));
+        anim.SetTrigger("Warning");
     }
 }
